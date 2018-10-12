@@ -8,12 +8,20 @@ class PostsIndex extends Component {
   }
 
   render(){
+    console.log('post:', this.props.posts);
     return (
       <div>
-        Posts Index
+        <h3>Posts</h3>
+        <ul className="list-group">
+          <li>what</li>
+        </ul>
       </div>
     )
   }
+}
+
+function mapStateToProps({ posts }) {
+  return { posts };
 }
 
 // function mapDispatchToProps({fetchPosts}) {
@@ -22,4 +30,4 @@ class PostsIndex extends Component {
 // Instead of using function, use { fetchPosts : fetchPosts }
 // simplified to { fetchPosts }
 
-export default connect(null, { fetchPosts })(PostsIndex);
+export default connect(mapStateToProps, { fetchPosts })(PostsIndex);
