@@ -9,15 +9,19 @@ class PostsNew extends Component{
   // Must provide field object parameter
   // field.input is an object that contains a bunch of event handlers and props
   renderField(field) {
+    // Pulls meta off of field, and pulls touched and error off of meta. wow
+    const { meta : { touched, error} } = field;
+    const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+
     return (
-      <div className="form-group">
+      <div className={className}>
         <label>{field.label}</label>
         <input
           className="form-control"
           type="text"
           {...field.input}
         />
-      <span style={{color: 'red'}}>{field.meta.touched ? field.meta.error : ''}</span>
+      <div className="text-help">{touched ? error : ''}</div>
       </div>
     );
   }
