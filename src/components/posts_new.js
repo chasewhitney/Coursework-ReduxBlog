@@ -17,14 +17,25 @@ class PostsNew extends Component{
           type="text"
           {...field.input}
         />
+      {field.meta.error}
       </div>
     );
   }
 
-  // Can pass props, like label below, to component!
+  onSubmit(values){
+    console.log('onSubmit values:', values);
+  }
+
   render(){
+    // const handleSubmit = this.props.handleSubmit;
+    const { handleSubmit } = this.props; // added by reduxForm
+
+    // Can pass props, like label below, to component!
     return (
-      <form>
+      // On user submit, first the redux side of things will run,
+      // then, if ok, calls the function we defined and passes us the
+      // values to work with
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
           label="Title"
           name="title"
@@ -40,6 +51,7 @@ class PostsNew extends Component{
           name="content"
           component={this.renderField}
         />
+      <button type="submit" className="btn btn-primary">Submit</button>
       </form>
     );
   };
@@ -47,11 +59,11 @@ class PostsNew extends Component{
 
 // Values is an object containing all values entered into the form
 function validate(values){
-  console.log('values:', values);
+  console.log('validate values:', values);
   // 1. Create errors object
   const errors = {};
 
-  // 2. Validation
+  // 2. Validation - errors.property corresponds to component name attribute
   if(!values.title){
     errors.title = "Enter a title with at least 3 characters!";
   }
@@ -67,6 +79,7 @@ function validate(values){
 
 }
 
+// Like connect, reduxForm is adding a bunch of properties to our component
 export default reduxForm({
   validate,
   form: 'PostsNewForm'
