@@ -17,7 +17,7 @@ class PostsNew extends Component{
           type="text"
           {...field.input}
         />
-      {field.meta.error}
+      <span style={{color: 'red'}}>{field.meta.touched ? field.meta.error : ''}</span>
       </div>
     );
   }
@@ -65,7 +65,7 @@ function validate(values){
 
   // 2. Validation - errors.property corresponds to component name attribute
   if(!values.title){
-    errors.title = "Enter a title with at least 3 characters!";
+    errors.title = "Enter a title!";
   }
   if(!values.categories){
     errors.categories = "Enter a category!";
