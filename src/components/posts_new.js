@@ -31,7 +31,10 @@ class PostsNew extends Component{
 
   onSubmit(values){
     console.log('onSubmit values:', values);
-    this.props.createPost(values);
+    ;
+    this.props.createPost(values, () => {
+      this.props.history.push('/')
+    });
   }
 
   render(){
@@ -68,7 +71,7 @@ class PostsNew extends Component{
 
 // Values is an object containing all values entered into the form
 function validate(values){
-  console.log('validate values:', values);
+  // console.log('validate values:', values);
   // 1. Create errors object
   const errors = {};
 
