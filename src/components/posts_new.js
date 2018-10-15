@@ -8,9 +8,10 @@ class PostsNew extends Component{
   // renderTitleField just returns some JSX, however we
   // still have to wire up the jsx to the field component
   // Field object contains some event handlers that we need to wire up to
-  // the jsx we are returning
-  // Must provide field object parameter
-  // field.input is an object that contains a bunch of event handlers and props
+  // the jsx we are returning.
+  // Must provide field object parameter.
+  // {...field.input} is an object that contains a bunch of event handlers and
+  // props like onChange, onFocus, onBlur, etc.
   renderField(field) {
     // Pulls meta off of field, and pulls touched and error off of meta. wow
     const { meta : { touched, error} } = field;
@@ -31,7 +32,6 @@ class PostsNew extends Component{
 
   onSubmit(values){
     console.log('onSubmit values:', values);
-    ;
     this.props.createPost(values, () => {
       this.props.history.push('/')
     });
@@ -46,6 +46,8 @@ class PostsNew extends Component{
       // On user submit, first the redux side of things will run,
       // then, if ok, calls the function we defined and passes us the
       // values to work with
+      // name is what piece of state this component will produce
+      // label is a prop we made up to use in renderField
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
           label="Title"
