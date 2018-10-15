@@ -11,9 +11,10 @@ class PostsShow extends Component {
     this.props.fetchPost(id);
   }
 
-  deletePost(id){
+  onDeleteClick(){
+    const { id } = this.props.match.params;
     console.log(`in deletePost (component) with id: ${id}`);
-    this.props.deletePost(id);
+    // this.props.deletePost(id);
   }
   render() {
     const { post } = this.props;
@@ -26,7 +27,7 @@ class PostsShow extends Component {
       <div>
         <Link to='/'>Back to index</Link>
         <div className="text-xs-right">
-          <button className="btn btn-primary" onClick={() => deletePost(post.id)}>
+          <button className="btn btn-danger" onClick={this.onDeleteClick.bind(this)}>
             Delete Post
           </button>
         </div>
@@ -43,4 +44,4 @@ function mapStateToProps({posts}, ownProps){
   return { post: posts[ownProps.match.params.id] };
 };
 
-export default connect(mapStateToProps, { fetchPost : fetchPost, deletePost : deletePost })(PostsShow);
+export default connect(mapStateToProps, { fetchPost, deletePost })(PostsShow);
