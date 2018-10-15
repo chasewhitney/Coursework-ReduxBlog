@@ -13,7 +13,8 @@ export default function(state = {}, action) {
       // SAME AS
       return { ...state, [action.payload.data.id] : action.payload.data};
     case DELETE_POST:
-      return _.omit(state, action.payload.id);
+      console.log(`payload in delete_post reducer: ${action.payload}`);
+      return _.omit(state, action.payload);
     default:
       return state;
   }
