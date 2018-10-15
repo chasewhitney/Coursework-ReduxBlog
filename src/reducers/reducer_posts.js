@@ -15,7 +15,7 @@ export default function(state = {}, action) {
       // SAME AS
       return { ...state, [action.payload.data.id] : action.payload.data};
     case DELETE_POST:
-      return _.omit(state, action.payload.data.id);
+      return _.omit(state, action.payload.id);
     default:
       return state;
   }
